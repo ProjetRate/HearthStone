@@ -59,6 +59,7 @@ public class Joueur {
 		
 	}
 	
+	
 	void utiliserPouvoir(java.lang.Object cible){
 		
 	}
