@@ -1,25 +1,28 @@
-package Joueur;
+package joueur;
 
 import carte.ICarte;
+import jeu.Heros;
+
+import java.util.ArrayList;
 
 public interface IJoueur {
-	static final int MAX_ENERGIE = 10;
-	static final int TAILLE_DECK = 15;
+	int MAX_ENERGIE = 10;
+	int TAILLE_DECK = 15;
 	
-	public abstract void finirTour();
-	public abstract ICarte getCarteEnJeu(String nomCarte);
-	public abstract ICarte 	getCarteEnMain(String nomCarteMain);
-	public abstract jeu.Heros getHeros();
-	public abstract java.util.ArrayList<ICarte> getJeu();
-	public abstract java.util.ArrayList<ICarte> getMain();
-	public abstract java.lang.String getPseudo();
-	public abstract int getStockEnergie();
-	public abstract void jouerCarte(ICarte carte);
-	public abstract void jouerCarte(ICarte carte, java.lang.Object cible);
-	public abstract void perdreCarte(ICarte carte);
-	public abstract void piocher();
-	public abstract void prendreTour();
-	public abstract void utiliserCarte(ICarte carte, java.lang.Object cible);
-	public abstract void utiliserPouvoir(java.lang.Object cible);
-	public abstract int getEnergie();
+	void finirTour();
+	ICarte getCarteEnJeu(String nomCarte);
+	ICarte 	getCarteEnMain(String nomCarteMain);
+	Heros getHeros();
+	ArrayList<ICarte> getJeu();
+	ArrayList<ICarte> getMain();
+	String getPseudo();
+	int getStockEnergie();
+	void jouerCarte(ICarte carte);
+	void jouerCarte(ICarte carte, java.lang.Object cible);
+	void perdreCarte(ICarte carte);
+	void piocher();
+	void prendreTour();
+	void utiliserCarte(ICarte carte, java.lang.Object cible);
+	void utiliserPouvoir(java.lang.Object cible);
+	int getEnergie();
 }

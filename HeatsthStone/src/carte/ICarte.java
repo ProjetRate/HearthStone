@@ -1,15 +1,15 @@
 package carte;
 
-import Joueur.IJoueur;
+import joueur.IJoueur;
 
 public interface ICarte {
 	boolean disparait();
 	void executerAction(Object cible);
 	void executerEffetDebutMiseEnJeu();
-	void xecuterEffetDebutTour(Object cible);
+	void executerEffetDebutTour(Object cible);
 	void executerEffetDisparition();
 	void executerEffetFinTour(Object cible);
-	String getCout();
+	int getCout();
 	String getNom();  
 	IJoueur getProprietaire();
 }
