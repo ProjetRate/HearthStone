@@ -1,70 +1,79 @@
 package Joueur;
 
-public class Joueur {
+import carte.ICarte;
+
+public class Joueur implements IJoueur{
 	static final int MAX_ENERGIE = 10;
 	static final int TAILLE_DECK = 15;
 	
-	void finirTour() {
+	public void finirTour() {
 	}
 	
-	Carte getCarteEnJeu(String nomCarte){
+	public ICarte getCarteEnJeu(String nomCarte){
+		return null;
 		
 	}
 	
-	Carte 	getCarteEnMain(String nomCarteMain){
+	public ICarte 	getCarteEnMain(String nomCarteMain){
+		return null;
 		
 	}
 	
-	jeu.Heros getHeros(){
+	public jeu.Heros getHeros(){
 		
 	}
 	
-	java.util.ArrayList<Carte> getJeu(){
+	public java.util.ArrayList<ICarte> getJeu(){
+		return null;
 		
 	}
 	
-	java.util.ArrayList<Carte> getMain(){
+	public java.util.ArrayList<ICarte> getMain(){
+		return null;
 		
 	}
 	
-	java.lang.String getPseudo() {
+	public java.lang.String getPseudo() {
+		return null;
 		
 	}
 	
-	int getStockEnergie(){
+	public int getStockEnergie(){
+		return 0;
 		
 	}
 	
-	void jouerCarte(Carte carte){
+	public void jouerCarte(ICarte carte){
 		
 	}
 	
-	void jouerCarte(Carte carte, java.lang.Object cible){
+	public void jouerCarte(ICarte carte, java.lang.Object cible){
 		
 	}
 	
-	void perdreCarte(Carte carte){
+	public void perdreCarte(ICarte carte){
 		
 	}
 	
-	void piocher(){
+	public void piocher(){
 		
 	}
 	
-	void prendreTour(){
+	public void prendreTour(){
 		
 	}
 	
-	void utiliserCarte(Carte carte, java.lang.Object cible){
+	public void utiliserCarte(ICarte carte, java.lang.Object cible){
 		
 	}
 	
 	
-	void utiliserPouvoir(java.lang.Object cible){
+	public void utiliserPouvoir(java.lang.Object cible){
 		
 	}
 	
-	int getEnergie(){
+	public int getEnergie(){
+		return 0;
 		
 	}
 	
