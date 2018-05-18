@@ -3,8 +3,6 @@ package Joueur;
 import carte.ICarte;
 
 public class Joueur implements IJoueur{
-	static final int MAX_ENERGIE = 10;
-	static final int TAILLE_DECK = 15;
 	
 	public void finirTour() {
 	}

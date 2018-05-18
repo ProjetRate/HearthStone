@@ -1,5 +1,6 @@
 package Capacité;
 
+
 public interface Capacité {	
 	void executerAction(Object cible);
 	void executerEffetDebutTour();
@@ -7,5 +8,5 @@ public interface Capacité {
 	void executerEffetFinTour();
 	void executerEffetMiseEnJeu(Object cible);
 	String getDescription();
-	String getNom();  
+	String getNom(); 
 }
