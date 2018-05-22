@@ -1,17 +1,19 @@
 package joueur;
 
 import carte.ICarte;
-import jeu.Heros;
+import heros.Heros;
 
 import java.util.ArrayList;
 
 public class Joueur implements IJoueur {
 
     private String nom;
+    private Heros heros;
     private int mana = 1;
+    
 
-    public Joueur(String pseudo) {
-        this.nom = pseudo;
+    public Joueur(String pseudo, Heros heros) {
+        this.heros = heros;
     }
 
     public void finirTour() {
@@ -25,11 +27,7 @@ public class Joueur implements IJoueur {
     public ICarte getCarteEnMain(String nomCarteMain) {
         return null;
 
-    }
-
-    public Heros getHeros() {
-        return null;
-    }
+    }    
 
     public ArrayList<ICarte> getJeu() {
         return null;
@@ -78,11 +76,30 @@ public class Joueur implements IJoueur {
 
     public void utiliserPouvoir(java.lang.Object cible) {
 
-    }
+    }    
 
-    public int getMana() {
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	public Heros getHeros() {
+        return heros;
+    }
+	public void setHeros(Heros heros) {
+		this.heros = heros;
+	}
+	
+	public int getMana() {
         return mana;
-
     }
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+    
+    
 
 }

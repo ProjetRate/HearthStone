@@ -1,10 +1,20 @@
 package capacite;
 
 public class Capacite implements ICapacite{
+	
+	private String nom, description;
 
-    @Override
+    public Capacite(String nom, String description) {
+		this.nom = nom;
+		this.description = description;
+	}
+
+	@Override
     public void executerAction(Object cible) {
-        
+		if(cible == null)
+			return; //throw
+		if (getClass() != cible.getClass())
+			return;//throw
     }
 
     @Override
@@ -29,11 +39,11 @@ public class Capacite implements ICapacite{
 
     @Override
     public String getDescription() {
-        return null;
+        return description;
     }
 
     @Override
     public String getNom() {
-        return null;
+        return nom;
     }
 }

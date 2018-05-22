@@ -1,7 +1,7 @@
 package joueur;
 
 import carte.ICarte;
-import jeu.Heros;
+import heros.Heros;
 
 import java.util.ArrayList;
 

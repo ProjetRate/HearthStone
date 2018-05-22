@@ -1,4 +1,4 @@
-package jeu;
+package plateau;
 
 import exception.HearthStoneException;
 import joueur.IJoueur;

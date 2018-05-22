@@ -1,7 +1,7 @@
 package carte;
 
 import capacite.ICapacite;
-import jeu.Heros;
+import heros.Heros;
 import joueur.IJoueur;
 
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ public abstract class Carte implements ICarte{
 
     private int cout;
     private String nom;
-    private List<ICapacite> capacite;
+    private ArrayList<ICapacite> capacite;
     private Heros heros;
 
-    protected Carte(int cout, String nom, List<ICapacite> capacite, Heros heros) {
+    public Carte(int cout, String nom, ArrayList<ICapacite> capacite, Heros heros) {
         this.cout = cout;
         this.nom = nom;
         this.capacite = capacite;
@@ -59,12 +59,12 @@ public abstract class Carte implements ICarte{
 
     @Override
     public int getCout() {
-        return 0;
+        return cout;
     }
 
     @Override
     public String getNom() {
-        return null;
+        return nom;
     }
 
     @Override
@@ -72,7 +72,7 @@ public abstract class Carte implements ICarte{
         return null;
     }
 
-    public List<ICapacite> getCapacite() {
+    public ArrayList<ICapacite> getCapacite() {
         return capacite;
     }
 }

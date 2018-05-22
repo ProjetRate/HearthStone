@@ -1,7 +1,7 @@
 package carte;
 
 import capacite.ICapacite;
-import jeu.Heros;
+import heros.Heros;
 
 import java.util.ArrayList;
 
