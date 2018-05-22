@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Joueur implements IJoueur {
 
     private String nom;
+    private int mana = 1;
 
     public Joueur(String pseudo) {
         this.nom = pseudo;
@@ -79,8 +80,8 @@ public class Joueur implements IJoueur {
 
     }
 
-    public int getEnergie() {
-        return 0;
+    public int getMana() {
+        return mana;
 
     }
 

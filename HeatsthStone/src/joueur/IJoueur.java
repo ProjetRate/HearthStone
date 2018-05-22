@@ -6,7 +6,7 @@ import jeu.Heros;
 import java.util.ArrayList;
 
 public interface IJoueur {
-	int MAX_ENERGIE = 10;
+	int MAX_MANA = 10;
 	int TAILLE_DECK = 15;
 	
 	void finirTour();
@@ -24,5 +24,5 @@ public interface IJoueur {
 	void prendreTour();
 	void utiliserCarte(ICarte carte, java.lang.Object cible);
 	void utiliserPouvoir(java.lang.Object cible);
-	int getEnergie();
+	int getMana();
 }

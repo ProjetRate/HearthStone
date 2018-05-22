@@ -1,6 +1,6 @@
 package main;
 
-import carte.EffetSpecial;
+import carte.Sort;
 import carte.ICarte;
 import carte.Serviteur;
 import exception.HearthStoneException;
@@ -18,7 +18,7 @@ public class Main {
         List<ICarte> cartes = FXCollections.observableArrayList(
                 new Serviteur(1, "",1,1),
                 new Serviteur(1, "",1,1),
-                new EffetSpecial(1, "")
+                new Sort(1, "")
         );
         System.out.println("");
         Scanner sc = new Scanner(System.in);
