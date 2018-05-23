@@ -5,7 +5,6 @@ import heros.Heros;
 import joueur.IJoueur;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Carte implements ICarte{
 

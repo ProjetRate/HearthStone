@@ -5,7 +5,7 @@ import joueur.IJoueur;
 
 public interface IPlateau {
 	void ajouterJoueur(IJoueur joueur) throws HearthStoneException;
-	void demarrerPartie();
+	void demarrerPartie() throws HearthStoneException;
 	boolean estDemarree();
 	void finTour(IJoueur joueur); 
 	void gagnePartie(IJoueur joueur); 

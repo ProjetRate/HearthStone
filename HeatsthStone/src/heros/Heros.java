@@ -1,6 +1,5 @@
 package heros;
 
-import capacite.Capacite;
 import capacite.ICapacite;
 
 public abstract class Heros {

@@ -1,6 +1,7 @@
 package joueur;
 
 import carte.ICarte;
+import exception.HearthStoneException;
 import heros.Heros;
 
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ public interface IJoueur {
 	int TAILLE_DECK = 15;
 	
 	void finirTour();
-	ICarte getCarteEnJeu(String nomCarte);
-	ICarte 	getCarteEnMain(String nomCarteMain);
+	ICarte getCarteEnJeu(String nomCarte) throws HearthStoneException;
+	ICarte 	getCarteEnMain(String nomCarteMain) throws HearthStoneException;
 	Heros getHeros();
 	ArrayList<ICarte> getJeu();
 	ArrayList<ICarte> getMain();

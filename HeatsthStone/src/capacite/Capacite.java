@@ -11,8 +11,10 @@ public class Capacite implements ICapacite{
 
 	@Override
     public void executerAction(Object cible) {
-		if(cible == null)
-			return; //throw
+		if (this == cible)
+			return;
+		if (cible == null)
+			return ;
 		if (getClass() != cible.getClass())
 			return;//throw
     }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Serviteur extends Carte {
     private int pointsAttaque;
     private int pointsVie;
+    private boolean peutEtreAttaque;
 
     public Serviteur(int cout, String nom, ArrayList<ICapacite> capacite, Heros heros, int pointsAttaque, int pointsVie) {
         super(cout, nom, capacite, heros);

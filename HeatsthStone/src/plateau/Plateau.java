@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Plateau implements IPlateau {
+	boolean estDemarree = false;
 
     ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();
     @Override
@@ -19,15 +20,18 @@ public class Plateau implements IPlateau {
     }
 
     @Override
-    public void demarrerPartie() {
+    public void demarrerPartie() throws HearthStoneException{
         if(joueurs.size() == 2) {
-
+        	estDemarree = true;
         }
+        else
+            throw new HearthStoneException("Pas assez de joueurs pour démarrer la partie.");
+
     }
 
     @Override
     public boolean estDemarree() {
-        return false;
+        return estDemarree;
     }
 
     @Override
