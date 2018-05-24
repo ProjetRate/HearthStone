@@ -1,5 +1,7 @@
 package capacite;
 
+import exception.HearthStoneException;
+
 public class Capacite implements ICapacite{
 	
 	private String nom, description;
@@ -10,14 +12,20 @@ public class Capacite implements ICapacite{
 	}
 
 	@Override
-    public void executerAction(Object cible) {
+    public void executerAction(Object cible) throws HearthStoneException {
+		/*
 		if (this == cible)
 			return;
 		if (cible == null)
 			return ;
 		if (getClass() != cible.getClass())
-			return;//throw
+			return;//throw*/
     }
+	
+	@Override
+	public void executerAction(Object cible, int points) throws HearthStoneException{
+		
+	}
 
     @Override
     public void executerEffetDebutTour() {

@@ -1,6 +1,9 @@
 package capacites;
 
+import exception.HearthStoneException;
 import capacite.Capacite;
+import carte.Serviteur;
+import heros.Heros;
 
 public class BouleDeFeu extends Capacite {
 
@@ -9,8 +12,17 @@ public class BouleDeFeu extends Capacite {
 	}
 
 	@Override
-	public void executerAction(Object cible) {		
+	public void executerAction(Object cible) throws HearthStoneException {		
 		super.executerAction(cible);
+		
+		if(!(cible instanceof Serviteur || cible instanceof Heros))
+            throw new HearthStoneException("Vous ne pouvez pas attaquer cette cible.");
+		
+		if (cible instanceof Heros)
+			((Heros) cible).setPointsVie(((Heros) cible).getPointsVie() - 1);
+		
+		if (cible instanceof Serviteur)
+			((Serviteur) cible).setPointsVie(((Serviteur) cible).getPointsVie() - 1);
 	}
 
 	@Override

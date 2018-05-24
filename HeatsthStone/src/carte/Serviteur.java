@@ -29,4 +29,12 @@ public class Serviteur extends Carte {
     public int getPointsVie() {
         return pointsVie;
     }
+    
+    public void setPointsVie(int pointsVie) {
+        this.pointsVie = pointsVie;
+    }
+
+    public void setPointsAttaque(int pointsAttaque) {
+        this.pointsAttaque = pointsAttaque;
+    }
 }

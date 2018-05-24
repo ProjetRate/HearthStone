@@ -1,14 +1,55 @@
 package plateau;
 
 import exception.HearthStoneException;
+import heros.Heros;
+import heros.Jaina;
+import heros.Rexxar;
 import joueur.IJoueur;
 import joueur.Joueur;
 
-import java.awt.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Plateau implements IPlateau {
 	boolean estDemarree = false;
+	
+	public Plateau(){
+
+        System.out.println("Nom joueur 1: ");
+        Scanner sc = new Scanner(System.in);
+        String scPseudo = sc.nextLine();
+        System.out.println("Héros ? ");
+        Heros herosJ1;
+        String scHeros = sc.nextLine();
+        if (scHeros.equals("Jaina"))
+        	herosJ1 = new Jaina();
+        else
+        	herosJ1 = new Rexxar();
+        Joueur joueur1 = new Joueur(scPseudo, herosJ1);
+        try {
+            ajouterJoueur(joueur1);
+        } catch (HearthStoneException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Nom joueur 2: ");
+        scPseudo = sc.nextLine();
+        System.out.println("Héros ? ");
+        Heros herosJ2;
+        scHeros = sc.nextLine();
+        if (scHeros.equals("Jaina"))
+        	herosJ2 = new Jaina();
+        else
+        	herosJ2 = new Rexxar();
+        Joueur joueur2 = new Joueur(scPseudo, herosJ2);
+        try {
+            ajouterJoueur(joueur2);
+        } catch (HearthStoneException e) {
+            e.printStackTrace();
+        }
+        
+        sc.close();
+	}
 
     ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();
     @Override
