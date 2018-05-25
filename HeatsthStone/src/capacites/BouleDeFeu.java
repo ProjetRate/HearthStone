@@ -8,7 +8,7 @@ import heros.Heros;
 public class BouleDeFeu extends Capacite {
 
 	public BouleDeFeu() {
-		super("Boule de feu", "Pouvoir héroique: inflige 1 point de dégât au personnage ciblé (le	héros adverse ou l'un de ses serviteurs)");
+		super("Boule de feu", "Pouvoir héroique: inflige 1 point de dégât au personnage ciblé (le héros adverse ou l'un de ses serviteurs)");
 	}
 
 	@Override

@@ -74,4 +74,11 @@ public abstract class Carte implements ICarte{
     public ArrayList<ICapacite> getCapacite() {
         return capacite;
     }
+
+	@Override
+	public String toString() {
+		return "Carte [cout=" + cout + ", nom=" + nom + ", capacite=" + capacite + ", heros=" + heros + "]";
+	}
+    
+    
 }

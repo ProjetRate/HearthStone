@@ -16,7 +16,7 @@ public interface IJoueur {
 	Heros getHeros();
 	ArrayList<ICarte> getJeu();
 	ArrayList<ICarte> getMain();
-	String getPseudo();
+	String getNom();
 	int getStockEnergie();
 	void jouerCarte(ICarte carte);
 	void jouerCarte(ICarte carte, java.lang.Object cible);

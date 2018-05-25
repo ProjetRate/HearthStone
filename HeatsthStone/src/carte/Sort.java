@@ -14,8 +14,13 @@ public class Sort extends Carte {
 
     public Sort(int cout, String nom, ArrayList<ICapacite> capacite) {
         super(cout, nom, capacite);
-        super.disparait();
+        super.executerEffetDisparition();
 
+    }
+    
+    @Override
+    public boolean disparait() {
+        return true;
     }
     
     @Override

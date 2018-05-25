@@ -56,4 +56,11 @@ public class Capacite implements ICapacite{
     public String getNom() {
         return nom;
     }
+
+	@Override
+	public String toString() {
+		return "Capacite [nom=" + nom + ", description=" + description + "]";
+	}
+    
+    
 }

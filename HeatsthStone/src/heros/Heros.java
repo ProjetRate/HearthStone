@@ -40,6 +40,11 @@ public abstract class Heros {
 	public void setPouvoir(ICapacite pouvoir) {
 		this.pouvoir = pouvoir;
 	}
+
+	@Override
+	public String toString() {
+		return "Heros [nom=" + nom + ", pointsVie=" + pointsVie + ", pouvoir=" + pouvoir + "]";
+	}
 	
 	
 	

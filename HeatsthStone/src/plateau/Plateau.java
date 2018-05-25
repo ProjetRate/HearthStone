@@ -1,73 +1,99 @@
 package plateau;
 
 import exception.HearthStoneException;
-import heros.Heros;
-import heros.Jaina;
-import heros.Rexxar;
-import joueur.IJoueur;
-import joueur.Joueur;
+import heros.*;
+import joueur.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Plateau implements IPlateau {
-	boolean estDemarree = false;
+	boolean estDemarree = false, estTerminee = false;
+	IJoueur joueurCourrant, adversaire;
+    ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();
+    Scanner sc = new Scanner(System.in);
+
 	
 	public Plateau(){
+		int compteur = 0;
+		while(compteur < JOUEURS_MAX){
+			
+			compteur++;
+			
+			System.out.printf("Nom joueur %d: ", compteur);
+	        
+	        String scPseudo = sc.nextLine();
+	        System.out.printf("Héros ? ");
+	        Heros heros;
+	        String scHeros = sc.nextLine();
+	        if (scHeros.toLowerCase().contains("jaina"))
+	        	heros = new Jaina();
+	        else
+	        	heros = new Rexxar();
+	        System.out.println(""+ heros.toString());
 
-        System.out.println("Nom joueur 1: ");
-        Scanner sc = new Scanner(System.in);
-        String scPseudo = sc.nextLine();
-        System.out.println("Héros ? ");
-        Heros herosJ1;
-        String scHeros = sc.nextLine();
-        if (scHeros.equals("Jaina"))
-        	herosJ1 = new Jaina();
-        else
-        	herosJ1 = new Rexxar();
-        Joueur joueur1 = new Joueur(scPseudo, herosJ1);
-        try {
-            ajouterJoueur(joueur1);
-        } catch (HearthStoneException e) {
-            e.printStackTrace();
-        }
+	        try {
+	            ajouterJoueur(new Joueur(scPseudo, heros));
+	        } catch (HearthStoneException e) {
+	            e.printStackTrace();
+	        }
+	        
 
-        System.out.println("Nom joueur 2: ");
-        scPseudo = sc.nextLine();
-        System.out.println("Héros ? ");
-        Heros herosJ2;
-        scHeros = sc.nextLine();
-        if (scHeros.equals("Jaina"))
-        	herosJ2 = new Jaina();
-        else
-        	herosJ2 = new Rexxar();
-        Joueur joueur2 = new Joueur(scPseudo, herosJ2);
-        try {
-            ajouterJoueur(joueur2);
-        } catch (HearthStoneException e) {
-            e.printStackTrace();
-        }
-        
-        sc.close();
+
+		}
+		
+		try {
+			demarrerPartie();
+		} catch (HearthStoneException e) {
+			e.printStackTrace();
+		}	
+		sc.close();
+  
 	}
 
-    ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();
     @Override
     public void ajouterJoueur(IJoueur joueur) throws HearthStoneException {
-        if(joueurs.size() < 2)
+        if(joueurs.size() < JOUEURS_MAX)
             joueurs.add(joueur);
         else
-            throw new HearthStoneException("Le nombre de joueur est trop elevée. Il doit être égale a 2.");
+            throw new HearthStoneException("Erreur: Le nombre de joueur maximal est déjà atteint. Il est égal a 2.");
     }
 
     @Override
     public void demarrerPartie() throws HearthStoneException{
-        if(joueurs.size() == 2) {
-        	estDemarree = true;
-        }
-        else
+        if(joueurs.size() < JOUEURS_MAX) {
             throw new HearthStoneException("Pas assez de joueurs pour démarrer la partie.");
+        }
+        estDemarree = true;
 
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n ");
+        Collections.shuffle(joueurs);
+        
+        setJoueurCourant(joueurs.get(0)); setAdversaire(joueurs.get(1));
+
+        //Scanner sc = new Scanner(System.in);
+        while(!estTerminee){
+        	System.out.println("#############################################");
+        	System.out.println("" + joueurCourrant);
+            String requete = "";
+
+        	
+            while( !requete.toLowerCase().contains("fintour")){
+            	requete = sc.nextLine();
+            	//...
+            	System.out.println(""+requete);
+
+            }
+            finTour(joueurCourrant);
+        	System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n ");
+
+        //estTerminee = true;
+
+            
+        }
+        //sc.close();
     }
 
     @Override
@@ -77,7 +103,9 @@ public class Plateau implements IPlateau {
 
     @Override
     public void finTour(IJoueur joueur) {
-
+    	joueurCourrant = adversaire;
+    	adversaire = joueur;
+    	joueurCourrant.prendreTour();
     }
 
     @Override
@@ -86,17 +114,22 @@ public class Plateau implements IPlateau {
     }
 
     @Override
-    public IJoueur getAdversaire(IJoueur joueur) {
-        return null;
+    public IJoueur getAdversaire() {
+        return adversaire;
+    }
+    
+    @Override
+    public void setAdversaire(IJoueur joueur) {
+    	adversaire = joueur;
     }
 
     @Override
     public IJoueur getJoueurCourant() {
-        return null;
+        return joueurCourrant;
     }
 
     @Override
     public void setJoueurCourant(IJoueur joueur) {
-
+    	joueurCourrant = joueur;
     }
 }

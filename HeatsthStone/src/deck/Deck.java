@@ -4,16 +4,18 @@ import carte.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
-public class Deck {
+public abstract class Deck {
     public ArrayList<ICarte> deck = null;
-    
+    /*
     public Deck(ArrayList<ICarte> cartes){
     	if(cartes == null){
-  
+    		new Deck();
     	}
-    	deck = cartes;
-    }
+    	else
+    		deck = cartes;
+    }*/
     public Deck(){
     	 deck = new ArrayList<ICarte>(Arrays.asList(
                 new Serviteur(1, "1", null,1,1),
@@ -29,6 +31,8 @@ public class Deck {
                 new Serviteur(2, "11", null,1,1),
                 new Sort(2, "12", null)
         ));
+         Collections.shuffle(deck);
+
     }
     
     private void prendreCarte(){

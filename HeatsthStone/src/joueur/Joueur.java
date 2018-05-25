@@ -50,11 +50,6 @@ public class Joueur implements IJoueur {
 
     }
 
-    public java.lang.String getPseudo() {
-        return null;
-
-    }
-
     public int getStockEnergie() {
         return 0;
 
@@ -111,6 +106,12 @@ public class Joueur implements IJoueur {
     }
 	public void setMana(int mana) {
 		this.mana = mana;
+	}
+
+	@Override
+	public String toString() {
+		return "Joueur [nom=" + nom + ", heros=" + heros + ", mana=" + mana + ", manaMax=" + manaMax + ", cartesEnMain="
+				+ cartesEnMain + ", cartesEnJeu=" + cartesEnJeu + "]";
 	}
     
     
