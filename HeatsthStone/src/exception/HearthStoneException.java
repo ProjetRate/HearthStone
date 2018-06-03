@@ -1,7 +1,12 @@
 package exception;
 
 public class HearthStoneException extends Exception {
-    public HearthStoneException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7807490394249164975L;
+
+	public HearthStoneException() {
         super();
     }
 

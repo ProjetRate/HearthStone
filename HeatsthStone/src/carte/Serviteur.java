@@ -1,24 +1,22 @@
 package carte;
 
 import capacite.ICapacite;
-import heros.Heros;
+import capacites.AttaqueCiblee;
+import exception.HearthStoneException;
 
 import java.util.ArrayList;
 
-public class Serviteur extends Carte {
+public abstract class Serviteur extends Carte {
     private int pointsAttaque;
     private int pointsVie;
-    private boolean peutEtreAttaque;
+    private boolean attaquable = false;
 
-    public Serviteur(int cout, String nom, ArrayList<ICapacite> capacite, Heros heros, int pointsAttaque, int pointsVie) {
-        super(cout, nom, capacite, heros);
-        this.pointsAttaque = pointsAttaque;
-        this.pointsVie = pointsVie;
-    }
-
-    public Serviteur(int cout, String nom, ArrayList<ICapacite> capacite, int pointsAttaque, int pointsVie) {
+    public Serviteur(int cout, String nom, ArrayList<ICapacite> capacite, int pointsAttaque, int pointsVie) throws HearthStoneException {
         super(cout, nom, capacite);
-        this.pointsAttaque = pointsAttaque;
+        if(capacite == null)
+        	throw new IllegalArgumentException("Erreur: La liste de capacités du serviteur est null.");
+        super.getCapacites().add(new AttaqueCiblee(pointsAttaque));
+        setPointsAttaque(pointsAttaque);
         this.pointsVie = pointsVie;
     }
 
@@ -37,4 +35,12 @@ public class Serviteur extends Carte {
     public void setPointsAttaque(int pointsAttaque) {
         this.pointsAttaque = pointsAttaque;
     }
+
+	public boolean estAttaquable() {
+		return attaquable;
+	}
+
+	public void setAttaquable(boolean attaquable) {
+		this.attaquable = attaquable;
+	}
 }

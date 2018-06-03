@@ -1,13 +1,16 @@
 package deck;
 
 import carte.*;
+import exception.HearthStoneException;
+import serviteurs.*;
+import sorts.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 public abstract class Deck {
-    public ArrayList<ICarte> deck = null;
+    protected ArrayList<ICarte> deck = null;
     /*
     public Deck(ArrayList<ICarte> cartes){
     	if(cartes == null){
@@ -16,26 +19,28 @@ public abstract class Deck {
     	else
     		deck = cartes;
     }*/
-    public Deck(){
-    	 deck = new ArrayList<ICarte>(Arrays.asList(
-                new Serviteur(1, "1", null,1,1),
-                new Serviteur(2, "2", null,1,1),
-                new Sort(2, "3", null),
-                new Serviteur(1, "4", null,1,1),
-                new Serviteur(2, "5", null,1,1),
-                new Sort(2, "6", null),
-                new Serviteur(1, "7", null,1,1),
-                new Serviteur(2, "8", null,1,1),
-                new Sort(2, "9", null),
-                new Serviteur(1, "10", null,1,1),
-                new Serviteur(2, "11", null,1,1),
-                new Sort(2, "12", null)
-        ));
+    public Deck(){ //cartes neutres
+    	 try {
+			deck = new ArrayList<ICarte>(Arrays.asList(
+			        new ChefDeRaid(),
+			        new ChampionDuHurlevent(),
+			        new ChasseMareeMurloc(),
+			        new LaMissiliereTemeraire(),
+			        new Charge()
+			));
+		} catch (HearthStoneException e) {
+			e.printStackTrace();
+		}
          Collections.shuffle(deck);
 
     }
     
-    private void prendreCarte(){
+    public ICarte prendreCarte() throws HearthStoneException{
+    	if(deck.isEmpty())
+    		throw new HearthStoneException("Le deck est vide.");
+		ICarte carte = deck.get(0);
+    	deck.remove(0);
+		return carte;
     	
     }
 

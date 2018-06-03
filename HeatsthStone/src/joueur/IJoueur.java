@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 public interface IJoueur {
 	int MAX_MANA = 10;
+	int MAX_CARTES_MAIN = 10;
 	int TAILLE_DECK = 15;
+
 	
 	void finirTour();
 	ICarte getCarteEnJeu(String nomCarte) throws HearthStoneException;
@@ -17,11 +19,10 @@ public interface IJoueur {
 	ArrayList<ICarte> getJeu();
 	ArrayList<ICarte> getMain();
 	String getNom();
-	int getStockEnergie();
-	void jouerCarte(ICarte carte);
+	void jouerCarte(ICarte carte) throws HearthStoneException;
 	void jouerCarte(ICarte carte, java.lang.Object cible);
 	void perdreCarte(ICarte carte);
-	void piocher();
+	void piocher() throws HearthStoneException;
 	void prendreTour();
 	void utiliserCarte(ICarte carte, java.lang.Object cible);
 	void utiliserPouvoir(java.lang.Object cible);

@@ -3,17 +3,20 @@ package plateau;
 import exception.HearthStoneException;
 import heros.*;
 import joueur.*;
+import carte.*;
+import deck.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+
+import capacite.ICapacite;
 
 public class Plateau implements IPlateau {
 	boolean estDemarree = false, estTerminee = false;
 	IJoueur joueurCourrant, adversaire;
     ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();
     Scanner sc = new Scanner(System.in);
-
 	
 	public Plateau(){
 		int compteur = 0;
@@ -25,22 +28,22 @@ public class Plateau implements IPlateau {
 	        
 	        String scPseudo = sc.nextLine();
 	        System.out.printf("Héros ? ");
-	        Heros heros;
+	        Heros heros; Deck deck;
 	        String scHeros = sc.nextLine();
-	        if (scHeros.toLowerCase().contains("jaina"))
+	        if (scHeros.toLowerCase().contains("jaina") || "jaina".contains(scHeros.toLowerCase())) {
 	        	heros = new Jaina();
-	        else
+	        	deck = new DeckMagicien();
+	        } else {
 	        	heros = new Rexxar();
+	        	deck = new DeckChasseur();
+	        }
 	        System.out.println(""+ heros.toString());
 
 	        try {
-	            ajouterJoueur(new Joueur(scPseudo, heros));
+	            ajouterJoueur(new Joueur(scPseudo, heros, deck));
 	        } catch (HearthStoneException e) {
 	            e.printStackTrace();
-	        }
-	        
-
-
+	        }    
 		}
 		
 		try {
@@ -51,9 +54,25 @@ public class Plateau implements IPlateau {
 		sc.close();
   
 	}
+	
+	/** Holder 
+    private static class PlateauHolder
+    {       
+        /** Instance unique non préinitialisée
+        private final static Plateau instance = new Plateau();
+    }
+ 
+    /** Point d'accès pour l'instance unique du singleton 
+    public static Plateau getInstance()
+    {
+        return PlateauHolder.instance;
+    }*/
+    
 
     @Override
     public void ajouterJoueur(IJoueur joueur) throws HearthStoneException {
+    	if(joueur == null)
+            throw new HearthStoneException("Erreur: Le joueur donnée en paramètre est null.");
         if(joueurs.size() < JOUEURS_MAX)
             joueurs.add(joueur);
         else
@@ -74,20 +93,25 @@ public class Plateau implements IPlateau {
 
         //Scanner sc = new Scanner(System.in);
         while(!estTerminee){
-        	System.out.println("#############################################");
-        	System.out.println("" + joueurCourrant);
-            String requete = "";
-
-        	
+	        String requete = "";
             while( !requete.toLowerCase().contains("fintour")){
+            	System.out.println("*************************************");
+	        	System.out.println("" + joueurCourrant);
+	        	System.out.println("[0] Fin du tour");
+	        	System.out.println("[1] Jouer carte");
+	        	System.out.println("[2] Utiliser carte");
             	requete = sc.nextLine();
             	//...
             	System.out.println(""+requete);
 
             }
-            finTour(joueurCourrant);
-        	System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n ");
+            try {
+                finTour(joueurCourrant);				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        	System.out.println("*************************************");
+        	System.out.println("\n\n\n\n ");
 
         //estTerminee = true;
 
@@ -102,15 +126,25 @@ public class Plateau implements IPlateau {
     }
 
     @Override
-    public void finTour(IJoueur joueur) {
+    public void finTour(IJoueur joueur) throws HearthStoneException {
+    	if(joueur.getJeu() == null)
+            throw new HearthStoneException("Erreur: Le jeu du joueur est null.");
+
+    	for(ICarte carte: joueur.getJeu()) {
+    		for(ICapacite capacite:carte.getCapacites()) {
+    			capacite.executerEffetFinTour();
+    		}
+    	}
+    	
     	joueurCourrant = adversaire;
-    	adversaire = joueur;
+    	adversaire = joueur;    	
     	joueurCourrant.prendreTour();
     }
 
     @Override
-    public void gagnePartie(IJoueur joueur) {
-
+    public void gagnePartie(IJoueur joueur) throws HearthStoneException {
+    	if(getAdversaire().getHeros().getPointsVie() <= 0)
+    		throw new HearthStoneException("" + joueur + " a gagné!!!");
     }
 
     @Override

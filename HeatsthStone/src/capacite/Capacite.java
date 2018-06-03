@@ -7,6 +7,10 @@ public class Capacite implements ICapacite{
 	private String nom, description;
 
     public Capacite(String nom, String description) {
+		if(nom == null)
+			throw new IllegalArgumentException("Erreur: Le nom de la carte est null.");
+		if(description == null)
+			throw new IllegalArgumentException("Erreur: La description de la carte est null.");
 		this.nom = nom;
 		this.description = description;
 	}
@@ -21,11 +25,6 @@ public class Capacite implements ICapacite{
 		if (getClass() != cible.getClass())
 			return;//throw*/
     }
-	
-	@Override
-	public void executerAction(Object cible, int points) throws HearthStoneException{
-		
-	}
 
     @Override
     public void executerEffetDebutTour() {
@@ -48,13 +47,13 @@ public class Capacite implements ICapacite{
     }
 
     @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
     public String getNom() {
         return nom;
+    }
+    
+    @Override
+    public String getDescription() {
+        return description;
     }
 
 	@Override
