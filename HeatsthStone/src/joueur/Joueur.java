@@ -99,7 +99,7 @@ public class Joueur implements IJoueur {
     		throw new HearthStoneException("Le nombre maximum de cartes en main est atteint.");
     	
     	try {
-			cartesEnMain.add(deck.prendreCarte());
+			cartesEnMain.add(deck.prendreCarte(this));
 		} catch (HearthStoneException e) {
 			System.out.println(e.getMessage());
 		}

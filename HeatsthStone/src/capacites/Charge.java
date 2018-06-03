@@ -17,9 +17,7 @@ public class Charge extends Capacite {
 		if(!(cible instanceof Serviteur))
 			throw new IllegalArgumentException("Erreur: La cible doit être un serviteur.");
 		Serviteur serviteur = (Serviteur)cible;
-		serviteur.setAttaquable(true);
-		
-		
+		serviteur.setPeutAttaquer(true);		
 
 	}
 

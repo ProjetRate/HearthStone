@@ -17,13 +17,7 @@ public class Capacite implements ICapacite{
 
 	@Override
     public void executerAction(Object cible) throws HearthStoneException {
-		/*
-		if (this == cible)
-			return;
-		if (cible == null)
-			return ;
-		if (getClass() != cible.getClass())
-			return;//throw*/
+		
     }
 
     @Override
@@ -59,6 +53,28 @@ public class Capacite implements ICapacite{
 	@Override
 	public String toString() {
 		return "Capacite [nom=" + nom + ", description=" + description + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Capacite other = (Capacite) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		return true;
 	}
     
     

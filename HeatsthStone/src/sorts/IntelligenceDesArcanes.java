@@ -9,7 +9,10 @@ import carte.Sort;
 public class IntelligenceDesArcanes extends Sort {
 
 	public IntelligenceDesArcanes() {
-		super(1, "Charge", new ArrayList<ICapacite>(Arrays.asList(new capacites.Pioche())));
+		super(1, "Intelligence des Arcanes", new ArrayList<ICapacite>(Arrays.asList(
+				new capacites.Pioche(),
+				new capacites.Pioche()
+				)));
 		// TODO Auto-generated constructor stub
 	}
 

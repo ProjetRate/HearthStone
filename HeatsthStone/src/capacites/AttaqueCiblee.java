@@ -28,7 +28,9 @@ public class AttaqueCiblee extends Capacite {
 			Serviteur serviteur = (Serviteur) cible;
 			if(!serviteur.estAttaquable())
 				throw new HearthStoneException("Vous ne pouvez pas attaquer ce serviteur.");
-			(serviteur).setPointsVie((serviteur).getPointsVie() - 1);
+			serviteur.setPointsVie((serviteur).getPointsVie() - 1);
+			if(serviteur.disparait())
+				serviteur.getProprietaire().perdreCarte(serviteur);
 		}
 	}
 	

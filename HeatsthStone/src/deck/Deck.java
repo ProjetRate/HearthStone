@@ -2,6 +2,7 @@ package deck;
 
 import carte.*;
 import exception.HearthStoneException;
+import joueur.IJoueur;
 import serviteurs.*;
 import sorts.*;
 
@@ -35,10 +36,11 @@ public abstract class Deck {
 
     }
     
-    public ICarte prendreCarte() throws HearthStoneException{
+    public ICarte prendreCarte(IJoueur proprietaire) throws HearthStoneException{
     	if(deck.isEmpty())
     		throw new HearthStoneException("Le deck est vide.");
 		ICarte carte = deck.get(0);
+		carte.setProprietaire(proprietaire);
     	deck.remove(0);
 		return carte;
     	

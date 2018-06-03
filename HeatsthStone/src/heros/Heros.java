@@ -6,6 +6,7 @@ public abstract class Heros {
 	private String nom;
 	private int pointsVie = 15;
 	private ICapacite pouvoir;
+	private boolean attaquable = true;
 	/*
 	public Heros(Heros heros) {
         this.nom = new String(heros.nom);
@@ -39,6 +40,14 @@ public abstract class Heros {
 
 	public void setPouvoir(ICapacite pouvoir) {
 		this.pouvoir = pouvoir;
+	}
+
+	public boolean estAttaquable() {
+		return attaquable;
+	}
+
+	public void setAttaquable(boolean attaquable) {
+		this.attaquable = attaquable;
 	}
 
 	@Override

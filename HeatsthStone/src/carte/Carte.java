@@ -10,6 +10,8 @@ public abstract class Carte implements ICarte{
     private int cout;
     private String nom;
     private ArrayList<ICapacite> capacites;
+	private IJoueur proprietaire = null;
+
 
     public Carte(int cout, String nom, ArrayList<ICapacite> capacite) {
         this.cout = cout;
@@ -18,9 +20,7 @@ public abstract class Carte implements ICarte{
     }
 
     @Override
-    public boolean disparait() {
-        return false;
-    }
+    public abstract boolean disparait();
 
     @Override
     public void executerAction(Object cible) {
@@ -59,7 +59,14 @@ public abstract class Carte implements ICarte{
 
     @Override
     public IJoueur getProprietaire() {
-        return null;
+        return proprietaire;
+    }
+    
+    @Override
+    public void setProprietaire(IJoueur proprietaire) {
+    	if(proprietaire == null)
+    		throw new IllegalArgumentException("Erreur: Le propirétaire ne peut plus être null.");
+    	this.proprietaire = proprietaire;
     }
 
     public ArrayList<ICapacite> getCapacites() {

@@ -15,5 +15,6 @@ public interface ICarte {
 	int getCout();
 	String getNom();  
 	IJoueur getProprietaire();
+	void setProprietaire(IJoueur proprietaire);
 	ArrayList<ICapacite> getCapacites();
 }

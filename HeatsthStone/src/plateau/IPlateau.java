@@ -5,6 +5,7 @@ import joueur.IJoueur;
 
 public interface IPlateau {
 	int JOUEURS_MAX = 2;
+	int NB_CARTES_DEPART = 4;
 
 	void ajouterJoueur(IJoueur joueur) throws HearthStoneException;
 	void demarrerPartie() throws HearthStoneException;

@@ -90,6 +90,11 @@ public class Plateau implements IPlateau {
         Collections.shuffle(joueurs);
         
         setJoueurCourant(joueurs.get(0)); setAdversaire(joueurs.get(1));
+        for(int i = 0, j = 0; i < NB_CARTES_DEPART; i++, j=0) {
+        	joueurs.get(j).piocher();
+        	joueurs.get(j+1).piocher();        	
+        }
+        
 
         //Scanner sc = new Scanner(System.in);
         while(!estTerminee){
@@ -144,7 +149,7 @@ public class Plateau implements IPlateau {
     @Override
     public void gagnePartie(IJoueur joueur) throws HearthStoneException {
     	if(getAdversaire().getHeros().getPointsVie() <= 0)
-    		throw new HearthStoneException("" + joueur + " a gagné!!!");
+    		throw new HearthStoneException("" + joueur.getNom() + " a gagné!!!");
     }
 
     @Override
