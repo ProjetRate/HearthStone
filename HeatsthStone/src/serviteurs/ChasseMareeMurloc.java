@@ -12,7 +12,7 @@ public class ChasseMareeMurloc extends Serviteur {
 	public ChasseMareeMurloc() throws HearthStoneException {
 		super(2, "Chasse-marée murloc", new ArrayList<ICapacite>(Arrays.asList(
 				new CriDeGuerre()
-				)), 1, 2);
+				)), 2, 1);
 	}
 
 }

@@ -37,7 +37,6 @@ public class Capacite implements ICapacite{
 
     @Override
     public void executerEffetMiseEnJeu(Object cible) {
-
     }
 
     @Override

@@ -1,6 +1,7 @@
 package joueur;
 
 import carte.ICarte;
+import carte.Serviteur;
 import deck.Deck;
 import exception.HearthStoneException;
 import heros.Heros;
@@ -29,7 +30,7 @@ public class Joueur implements IJoueur {
     @Override
     public ICarte getCarteEnJeu(String nomCarte) throws HearthStoneException {
     	for (ICarte carte : cartesEnJeu) {
-    		 if( carte.getNom().contains(nomCarte))
+    		 if( carte.getNom().toLowerCase().contains(nomCarte.toLowerCase()))
     			 return carte;
 		}
         throw new HearthStoneException("La carte n'est pas sur le plateau.");
@@ -38,7 +39,7 @@ public class Joueur implements IJoueur {
 
     public ICarte getCarteEnMain(String nomCarte) throws HearthStoneException {
     	for (ICarte carte : cartesEnMain) {
-   		 if( carte.getNom().contains(nomCarte))
+   		 if( carte.getNom().toLowerCase().contains(nomCarte.toLowerCase()))
    			 return carte;
 		}
        throw new HearthStoneException("La carte n'est pas dans votre main.");
@@ -59,20 +60,24 @@ public class Joueur implements IJoueur {
     	if (carte == null)
 			throw new IllegalArgumentException("Erreur: La carte est null.");
     	
-    	if(mana - carte.getCout() <= 0)
+    	if(mana - carte.getCout() < 0)
     		throw new HearthStoneException("Vous n'avez pas assez de mana pour jouer cette carte.");
     	
     	setMana(mana - carte.getCout());
     	
-		this.getMain().remove(carte);
-		this.getJeu().add(carte);
+    	cartesEnMain.remove(carte);
 		
 		if (carte.getCapacites() == null)
 			throw new IllegalArgumentException("Erreur: La liste de capacités est null.");
 		
+				
+		carte.executerEffetDebutMiseEnJeu(carte);
+		
 		for (ICapacite capacite : carte.getCapacites()) {
 			capacite.executerEffetMiseEnJeu(carte);
-			}
+			}		
+
+		this.getJeu().add(carte);
 		if(carte.disparait())
 			this.perdreCarte(carte);
     }
@@ -88,7 +93,7 @@ public class Joueur implements IJoueur {
 		try {
 			carte = this.getCarteEnJeu(carte.getNom());
 		} catch (HearthStoneException e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 		cartesEnJeu.remove(carte);
 
@@ -109,7 +114,12 @@ public class Joueur implements IJoueur {
     public void prendreTour() {
     	if (manaMax < MAX_MANA)
     		manaMax = manaMax + 1;
-    	mana = manaMax;   	
+    	mana = manaMax;
+    	for (ICarte carte : cartesEnJeu) {
+			if(carte instanceof Serviteur) {
+				((Serviteur) carte).setPeutAttaquer(true);
+			}
+		}
     	
     	try {
     		piocher();
@@ -152,8 +162,9 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public String toString() {
-		return "Joueur [nom=" + nom + ", heros=" + heros + ", mana=" + mana + ", manaMax=" + manaMax + ", cartesEnMain="
-				+ cartesEnMain + ", cartesEnJeu=" + cartesEnJeu + "]";
+		//return "Joueur [nom=" + nom + ", heros=" + heros + ", mana=" + mana + ", manaMax=" + manaMax + ", cartesEnMain="
+		//		+ cartesEnMain + ", cartesEnJeu=" + cartesEnJeu + "]";
+		return " " + nom + " mana=" + mana;
 	}
     
     

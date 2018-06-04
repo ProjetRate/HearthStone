@@ -45,7 +45,7 @@ public class InvocationDeServiteurs extends Capacite {
 		Serviteur invoqueur = (Serviteur)cible;
 		//On ajoute le serviteur invoqué à la suite du serviteur joué
 		int index = invoqueur.getProprietaire().getJeu().indexOf(invoqueur);
-		invoqueur.getProprietaire().getJeu().add(index, carteInvoque);		
+		invoqueur.getProprietaire().getJeu().add(index+1, carteInvoque);		
 
 	}
 	

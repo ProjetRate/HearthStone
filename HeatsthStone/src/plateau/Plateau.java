@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import capacite.ICapacite;
+import capacites.AttaqueCiblee;
 
 public class Plateau implements IPlateau {
 	boolean estDemarree = false, estTerminee = false;
@@ -95,19 +96,37 @@ public class Plateau implements IPlateau {
         	joueurs.get(j+1).piocher();        	
         }
         
-
+        jouer();
         //Scanner sc = new Scanner(System.in);
-        while(!estTerminee){
+        
+        //sc.close();
+    }
+    
+    private void jouer() {
+    	while(!estTerminee){
 	        String requete = "";
-            while( !requete.toLowerCase().contains("fintour")){
-            	System.out.println("*************************************");
-	        	System.out.println("" + joueurCourrant);
+            while( !requete.toLowerCase().contains("0") && !requete.toLowerCase().contains("Fin")){
+	        	System.out.println("Adversaire" + adversaire);
+	        	System.out.println("*************************************************************");
+	        	System.out.println("\t\t\t" + adversaire.getHeros());
+	        	System.out.println(""+adversaire.getJeu());
+	        	System.out.println("-------------------------------------------------------------");
+	        	System.out.println(""+joueurCourrant.getJeu());
+	        	System.out.println("\t\t\t" + joueurCourrant.getHeros());
+	        	System.out.println("*************************************************************");
+
+	        	System.out.println("Joueur" + joueurCourrant);
+	        	System.out.println("Main" + joueurCourrant.getMain());
 	        	System.out.println("[0] Fin du tour");
 	        	System.out.println("[1] Jouer carte");
-	        	System.out.println("[2] Utiliser carte");
+	        	System.out.println("[2] Faire attaquer un serviteur");
+	        	System.out.println("[3] Utiliser pouvoir héros");
+	        	System.out.println("[4] Info carte");
+
             	requete = sc.nextLine();
+            	choisir(requete);
             	//...
-            	System.out.println(""+requete);
+            	System.out.println("");
 
             }
             try {
@@ -115,14 +134,47 @@ public class Plateau implements IPlateau {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-        	System.out.println("*************************************");
+        	System.out.println("#####################################");
         	System.out.println("\n\n\n\n ");
-
-        //estTerminee = true;
-
             
-        }
-        //sc.close();
+        }    	
+    }
+    
+    private void choisir(String choix) {
+    	String requete = "";
+    	if (choix.equals("1") || choix.contains("1") || choix.toLowerCase().contains("jouer")) {
+    		System.out.printf("Jouer -> ");
+        	requete = sc.nextLine();
+        	try {
+				joueurCourrant.jouerCarte(joueurCourrant.getCarteEnMain(requete));
+			} catch (HearthStoneException e) {
+				System.out.println(e.getMessage());
+			}
+
+    	}
+    	if (choix.equals("2") || choix.contains("2") || choix.toLowerCase().contains("serviteur")) {
+    		System.out.printf("Serviteur -> ");
+        	requete = sc.nextLine();
+        	try {
+        		Serviteur attaquant = (Serviteur) joueurCourrant.getCarteEnJeu(requete);
+        		if (!attaquant.PeutAttaquer())
+        			throw new HearthStoneException("Ce serviteur ne peut actuellement pas attaquer.");
+        		System.out.printf("Attaquer -> ");
+            	requete = sc.nextLine();
+            	ICapacite attaque = null;
+            	for (ICapacite capacite : attaquant.getCapacites()) {
+					if(capacite.getNom().equals(new AttaqueCiblee(0).getNom())) {
+						attaque = capacite;
+					}
+				}
+            	
+            	attaque.executerAction(adversaire.getCarteEnJeu(requete));
+            	attaquant.setPeutAttaquer(false);
+			} catch (HearthStoneException e) {
+				System.out.println(e.getMessage());
+			}
+
+    	}
     }
 
     @Override

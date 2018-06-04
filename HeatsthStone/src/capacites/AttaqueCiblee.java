@@ -17,18 +17,19 @@ public class AttaqueCiblee extends Capacite {
 	
 	@Override
 	public void executerAction(Object cible ) throws HearthStoneException {	
-		super.executerAction(cible);
+		if(cible == null)
+			throw new IllegalArgumentException("Erreur: L'objet ne peut pas être null.");
 		if(!(cible instanceof Serviteur || cible instanceof Heros))
             throw new HearthStoneException("Vous ne pouvez pas attaquer cette cible.");
 		
 		if (cible instanceof Heros)
-			((Heros) cible).setPointsVie(((Heros) cible).getPointsVie() - 1);
+			((Heros) cible).setPointsVie(((Heros) cible).getPointsVie() - degats);
 		
 		if (cible instanceof Serviteur){
 			Serviteur serviteur = (Serviteur) cible;
 			if(!serviteur.estAttaquable())
 				throw new HearthStoneException("Vous ne pouvez pas attaquer ce serviteur.");
-			serviteur.setPointsVie((serviteur).getPointsVie() - 1);
+			serviteur.setPointsVie((serviteur).getPointsVie() - degats);
 			if(serviteur.disparait())
 				serviteur.getProprietaire().perdreCarte(serviteur);
 		}

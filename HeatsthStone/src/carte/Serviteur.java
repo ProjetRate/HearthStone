@@ -59,4 +59,10 @@ public abstract class Serviteur extends Carte {
 			return true;
         return false;
     }
+	
+	@Override
+	public String toString() {
+		//return "Carte [cout=" + cout + ", nom=" + nom + ", capacite=" + capacites + "]";
+		return "[" + super.getCout() +" "+ super.getNom() +" "+ pointsAttaque+"/"+pointsVie+ "]"; 
+	}
 }

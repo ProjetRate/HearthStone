@@ -29,7 +29,6 @@ public abstract class Carte implements ICarte{
 
     @Override
     public void executerEffetDebutMiseEnJeu(Object cible) {
-
     }
 
     @Override
@@ -65,7 +64,7 @@ public abstract class Carte implements ICarte{
     @Override
     public void setProprietaire(IJoueur proprietaire) {
     	if(proprietaire == null)
-    		throw new IllegalArgumentException("Erreur: Le propirétaire ne peut plus être null.");
+    		throw new IllegalArgumentException("Erreur: Le propriétaire ne peut plus être null.");
     	this.proprietaire = proprietaire;
     }
 
@@ -75,7 +74,8 @@ public abstract class Carte implements ICarte{
 
 	@Override
 	public String toString() {
-		return "Carte [cout=" + cout + ", nom=" + nom + ", capacite=" + capacites + "]";
+		//return "Carte [cout=" + cout + ", nom=" + nom + ", capacite=" + capacites + "]";
+		return "[" + cout +" "+ nom + "]"; 
 	}
     
     

@@ -52,7 +52,8 @@ public abstract class Heros {
 
 	@Override
 	public String toString() {
-		return "Heros [nom=" + nom + ", pointsVie=" + pointsVie + ", pouvoir=" + pouvoir + "]";
+		//return "Heros [nom=" + nom + ", pointsVie=" + pointsVie + ", pouvoir=" + pouvoir + "]";
+		return "" + nom + " " + pointsVie;
 	}
 	
 	

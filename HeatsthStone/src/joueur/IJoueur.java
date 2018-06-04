@@ -27,4 +27,5 @@ public interface IJoueur {
 	void utiliserCarte(ICarte carte, java.lang.Object cible);
 	void utiliserPouvoir(java.lang.Object cible);
 	int getMana();
+	void setMana(int mana);
 }

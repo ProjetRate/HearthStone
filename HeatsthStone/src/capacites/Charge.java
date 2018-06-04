@@ -15,10 +15,11 @@ public class Charge extends Capacite {
 		if(cible == null)
 			throw new IllegalArgumentException("Erreur: La cible ne doit pas être null. Elle doit être la carte visée.");
 		if(!(cible instanceof Serviteur))
-			throw new IllegalArgumentException("Erreur: La cible doit être un serviteur.");
+			return;
 		Serviteur serviteur = (Serviteur)cible;
-		serviteur.setPeutAttaquer(true);		
-
+		serviteur.setPeutAttaquer(true);
 	}
+	
+	
 
 }

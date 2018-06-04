@@ -8,7 +8,7 @@ public class EffetPermanent extends Capacite {
 	private String nom, description;
 	private int bonusPV, bonusPA;
 	
-	public EffetPermanent(String nom, String description, int bonusPV, int bonusPA) {
+	public EffetPermanent(String nom, String description, int bonusPA, int bonusPV) {
 		super(nom, description);
 		this.bonusPV = bonusPV;
 		this.bonusPA = bonusPA;

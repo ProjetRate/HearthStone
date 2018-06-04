@@ -17,7 +17,7 @@ public class Sort extends Carte {
     }
     
     @Override
-    public void executerEffetDebutMiseEnJeu(Object cible) {
+    public void executerEffetDebutMiseEnJeu(Object cible){
     	
     	for (ICapacite capacite : getCapacites()) {
     		capacite.executerEffetMiseEnJeu(cible);
