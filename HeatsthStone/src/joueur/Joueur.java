@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import capacite.EffetPermanent;
 import capacite.ICapacite;
+import capacites.Provocation;
 
 public class Joueur implements IJoueur {
     private String nom;
@@ -74,15 +75,13 @@ public class Joueur implements IJoueur {
 		
 				
 		carte.executerEffetDebutMiseEnJeu(carte);
-		/*
-		for (ICapacite capacite : carte.getCapacites()) {
-			capacite.executerEffetMiseEnJeu(carte);
-			}		
-*/
-		for(ICarte carteEnjeu : cartesEnJeu) {
-			for(ICapacite capaciteCarteEnJeu : carteEnjeu.getCapacites())
-				if(capaciteCarteEnJeu instanceof EffetPermanent)
-					capaciteCarteEnJeu.executerAction(carte);
+
+		if(carte instanceof Serviteur) {
+			for(ICarte carteEnjeu : cartesEnJeu) {
+				for(ICapacite capaciteCarteEnJeu : carteEnjeu.getCapacites())
+					if(capaciteCarteEnJeu instanceof EffetPermanent || capaciteCarteEnJeu instanceof Provocation)
+						capaciteCarteEnJeu.executerAction((Serviteur) carte);
+			}
 		}
 		this.getJeu().add(carte);
 		if(carte.disparait())

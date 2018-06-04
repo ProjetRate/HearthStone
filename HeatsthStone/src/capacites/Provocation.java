@@ -4,6 +4,7 @@ import capacite.Capacite;
 import capacite.ICapacite;
 import carte.ICarte;
 import carte.Serviteur;
+import exception.HearthStoneException;
 
 public class Provocation extends Capacite {
 
@@ -35,6 +36,25 @@ public class Provocation extends Capacite {
 	}	
 	
 	@Override
+	public void executerAction(Object cible) throws HearthStoneException {
+		// Il faut appliquer l'effet sur la carte qui entre en jeu
+		if(!(cible instanceof Serviteur))
+			return;
+		Serviteur serviteurAllie = (Serviteur)cible;
+
+		if(serviteurAllie.estAttaquable()) {
+			//On vérifie que le serviteur allié ne possède pas provocation
+			boolean possedeProvocation = false;
+			for (ICapacite capaciteServiteurAllie : ((Serviteur) serviteurAllie).getCapacites()) {
+				if(capaciteServiteurAllie.equals(this))
+					possedeProvocation = true;							
+			}
+			serviteurAllie.setAttaquable(possedeProvocation);
+			
+		}
+	}
+	
+	@Override
 	public void executerEffetDisparition(Object cible) {
 		if (cible == null)
 			throw new IllegalArgumentException("Erreur: La cible est null");
@@ -43,19 +63,15 @@ public class Provocation extends Capacite {
 		Serviteur provoqueur = (Serviteur)cible;
 		//On vérifie que les autres serviteurs sont tous inattaquables, sinon il y a un autre serviteur avec provocation
 		for (ICarte serviteurAllie : provoqueur.getProprietaire().getJeu()) {
-			
+			if(serviteurAllie instanceof Serviteur)
+				if(((Serviteur) serviteurAllie).estAttaquable())
+					return;
 		}
 		provoqueur.getProprietaire().getHeros().setAttaquable(true);
 		for (ICarte serviteurAllie : provoqueur.getProprietaire().getJeu()) {
 			if(serviteurAllie instanceof Serviteur) {
 				if(((Serviteur) serviteurAllie).estAttaquable()) {
-					//On vérifie que le serviteur allié ne possède pas provocation
-					boolean possedeProvocation = false;
-					for (ICapacite capaciteServiteurAllie : ((Serviteur) serviteurAllie).getCapacites()) {
-						if(capaciteServiteurAllie.equals(this))
-							possedeProvocation = true;							
-					}
-					((Serviteur) serviteurAllie).setAttaquable(possedeProvocation);
+					((Serviteur) serviteurAllie).setAttaquable(true);
 					
 				}
 			}

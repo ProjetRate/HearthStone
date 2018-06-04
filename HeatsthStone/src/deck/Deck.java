@@ -28,7 +28,8 @@ public abstract class Deck {
 			        new ChasseMareeMurloc(),
 			        new LaMissiliereTemeraire(),
 			        new Charge(),
-			        new OgreMagi()
+			        new OgreMagi(),
+			        new Archimage()
 			));
 		} catch (HearthStoneException e) {
 			e.printStackTrace();
