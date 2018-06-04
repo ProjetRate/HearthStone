@@ -1,28 +1,52 @@
 package capacites;
 
 import exception.HearthStoneException;
+
+import java.util.Scanner;
+
 import capacite.Capacite;
 import carte.Serviteur;
 import heros.Heros;
+import joueur.IJoueur;
+import plateau.Plateau;
 
 public class BouleDeFeu extends Capacite {
 
-	public BouleDeFeu() {
-		super("Boule de feu", "Pouvoir héroique: inflige 1 point de dégât au personnage ciblé (le héros adverse ou l'un de ses serviteurs)");
+	public BouleDeFeu() { //capacité spéciale
+		super("Boule de feu", "Pouvoir héroique: inflige 1 point de dégât au personnage ciblé (le héros adverse ou l'un de ses serviteurs. Coût = 2)");
 	}
 
 	@Override
 	public void executerAction(Object cible) throws HearthStoneException {		
-		super.executerAction(cible);
+		if(cible == null)
+			throw new IllegalArgumentException("Erreur: C'est pas possible, mais bon.");
+		if(!(cible instanceof Plateau))
+			throw new IllegalArgumentException("Erreur: La cible doit être le plateau.");
+		Plateau plateau = (Plateau) cible;
+		Heros herosAdversaire = plateau.getAdversaire().getHeros();		
+
+		if(!((IJoueur) plateau.getJoueurCourant()).getHeros().peutAttaquer())
+			throw new HearthStoneException("Le héros ne peut pas attaquer.");
+		if(plateau.getJoueurCourant().getMana() - 2 < 0)
+			throw new HearthStoneException("Vous n'avez pas assez de mana.");
 		
-		if(!(cible instanceof Serviteur || cible instanceof Heros))
-            throw new HearthStoneException("Vous ne pouvez pas attaquer cette cible.");
+		System.out.println("Cible -> ");
 		
-		if (cible instanceof Heros)
-			((Heros) cible).setPointsVie(((Heros) cible).getPointsVie() - 1);
 		
-		if (cible instanceof Serviteur)
-			((Serviteur) cible).setPointsVie(((Serviteur) cible).getPointsVie() - 1);
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		String requete = sc.nextLine();
+		
+		if(herosAdversaire.getNom().toLowerCase().contains(requete.toLowerCase())) {
+			herosAdversaire.setPointsVie(herosAdversaire.getPointsVie() - 1);
+			plateau.gagnePartie(plateau.getJoueurCourant());
+    	} else {
+    		Serviteur serviteurAdverse = (Serviteur) plateau.getAdversaire().getCarteEnJeu(requete);
+    		serviteurAdverse.setPointsVie(serviteurAdverse.getPointsVie() - 1);
+    		
+    	}
+		plateau.getJoueurCourant().getHeros().setPeutAttaquer(false);
+		plateau.getJoueurCourant().setMana(plateau.getJoueurCourant().getMana() - 2);
 	}
 
 	@Override
@@ -37,13 +61,6 @@ public class BouleDeFeu extends Capacite {
 		Capacite other = (Capacite)obj;
 		return super.getDescription() == other.getDescription();
 	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-	
 	
 
 }

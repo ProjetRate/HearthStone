@@ -1,5 +1,7 @@
 package exception;
 
+import heros.Heros;
+
 public class HearthStoneException extends Exception {
     /**
 	 * 
@@ -14,7 +16,7 @@ public class HearthStoneException extends Exception {
         super(message);
     }
 
-    public HearthStoneException(String message, Throwable cause) {
-        super(message, cause);
+    public HearthStoneException(String message, Heros heros) {
+        super(message);
     }
 }

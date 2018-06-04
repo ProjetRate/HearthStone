@@ -4,7 +4,8 @@ import plateau.Plateau;
 
 public class Main {
 
-    public static void main(String[] args) {
+    @SuppressWarnings("unused")
+	public static void main(String[] args) {
         
         Plateau plateau = new Plateau();
         

@@ -29,15 +29,23 @@ public abstract class Carte implements ICarte{
 
     @Override
     public void executerEffetDebutMiseEnJeu(Object cible) {
+    	for (ICapacite capacite : getCapacites()) {
+    		capacite.executerEffetMiseEnJeu(cible);
+    	}
     }
 
     @Override
     public void executerEffetDebutTour(Object cible) {
-
+    	for (ICapacite capacite : getCapacites()) {
+    		capacite.executerEffetDebutTour();;
+    	}
     }
 
     @Override
     public void executerEffetDisparition() {
+    	for (ICapacite capacite : getCapacites()) {
+    		capacite.executerEffetDisparition(this);
+    	}
 
     }
 

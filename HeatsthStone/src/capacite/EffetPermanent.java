@@ -5,7 +5,6 @@ import carte.Serviteur;
 import exception.HearthStoneException;
 
 public class EffetPermanent extends Capacite {
-	private String nom, description;
 	private int bonusPV, bonusPA;
 	
 	public EffetPermanent(String nom, String description, int bonusPA, int bonusPV) {
@@ -36,7 +35,13 @@ public class EffetPermanent extends Capacite {
 
 	@Override
 	public void executerAction(Object cible) throws HearthStoneException {
-		// TODO Auto-generated method stub
+		// Il faut appliquer l'effet sur la carte qui entre en jeu
+		if(!(cible instanceof Serviteur))
+			return;
+		Serviteur serviteur = (Serviteur)cible;
+		serviteur.setPointsVie(serviteur.getPointsVie() + bonusPV);
+		serviteur.setPointsAttaque(serviteur.getPointsAttaque() + bonusPA);
+
 
 	}
 
@@ -76,11 +81,6 @@ public class EffetPermanent extends Capacite {
 			serviteurJeu.setPointsAttaque(serviteurJeu.getPointsAttaque() + bonusPA);
 		}
 
-	}
-	
-	@Override
-	public String toString() {
-		return "Capacite [" + nom + " : " + description+"]";
 	}
 
 }

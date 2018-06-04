@@ -26,12 +26,13 @@ public class Charge extends Sort {
 			throw new IllegalArgumentException("Erreur: La cible doit être un sort.");
 		Sort sort = (Sort)cible;
 		
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		
 		try {
 			ICarte carteCible = sort.getProprietaire().getCarteEnJeu(sc.nextLine().toLowerCase());
 		
-			sc.close();
+			//sc.close();
 			if(carteCible == null)
 				throw new IllegalArgumentException("Erreur: La cible ne doit pas être null. Elle doit être la carte visée.");
 			if(!(carteCible instanceof Serviteur))
@@ -39,6 +40,7 @@ public class Charge extends Sort {
 			Serviteur serviteur = (Serviteur)carteCible;
 
 			serviteur.getCapacites().add(super.getCapacites().get(0));
+			super.getCapacites().get(0).executerEffetMiseEnJeu(serviteur);
 		} catch (HearthStoneException e) {
 			System.out.println(e.getMessage());
 			sort.getProprietaire().getMain().add(this);

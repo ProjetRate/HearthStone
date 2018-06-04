@@ -7,7 +7,7 @@ import exception.HearthStoneException;
 public class Pioche extends Capacite {
 
 	public Pioche() {
-		super("Pioche", "La carte qui possède cette capacité permet de piocher une ou plusieurs cartes.");
+		super("Pioche", "La carte qui possède cette capacité permet de piocher une carte.");
 		// TODO Auto-generated constructor stub
 	}
 	

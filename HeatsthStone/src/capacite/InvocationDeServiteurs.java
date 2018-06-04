@@ -5,7 +5,6 @@ import carte.Serviteur;
 import exception.HearthStoneException;
 
 public class InvocationDeServiteurs extends Capacite {
-	private String nom, description;
 	private ICarte carteInvoque;
 	
 	public InvocationDeServiteurs(String nom, String description, ICarte carte) {
@@ -43,15 +42,19 @@ public class InvocationDeServiteurs extends Capacite {
 		if(cible == null)
 			throw new IllegalArgumentException("Erreur: La cible ne doit pas être null. Elle doit être la carte jouée.");
 		Serviteur invoqueur = (Serviteur)cible;
-		//On ajoute le serviteur invoqué à la suite du serviteur joué
-		int index = invoqueur.getProprietaire().getJeu().indexOf(invoqueur);
-		invoqueur.getProprietaire().getJeu().add(index+1, carteInvoque);		
+		invoqueur.getProprietaire().getJeu().add(carteInvoque);
+		carteInvoque.setProprietaire(invoqueur.getProprietaire());
 
-	}
-	
-	@Override
-	public String toString() {
-		return "Capacite [" + nom + " : " + description+"]";
+		for(ICarte carteEnjeu : carteInvoque.getProprietaire().getJeu()) {
+			for(ICapacite capaciteCarteEnJeu : carteEnjeu.getCapacites())
+				if(capaciteCarteEnJeu instanceof EffetPermanent)
+					try {
+						capaciteCarteEnJeu.executerAction(carteInvoque);
+					} catch (HearthStoneException e) {
+						e.printStackTrace();
+					}
+		}
+
 	}
 
 }

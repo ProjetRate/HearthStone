@@ -20,7 +20,6 @@ public interface IJoueur {
 	ArrayList<ICarte> getMain();
 	String getNom();
 	void jouerCarte(ICarte carte) throws HearthStoneException;
-	void jouerCarte(ICarte carte, java.lang.Object cible);
 	void perdreCarte(ICarte carte);
 	void piocher() throws HearthStoneException;
 	void prendreTour();

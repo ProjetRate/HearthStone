@@ -6,15 +6,16 @@ import exception.HearthStoneException;
 import heros.Heros;
 
 public class AttaqueCiblee extends Capacite {
-	int degats;
+	int degats;	
 
 	public AttaqueCiblee(int degats) throws HearthStoneException {
-		super("Attaque ciblée", "Cette	capacité permet	à la carte qui la possède d'attaquer une cible,	soit le	héros, soit	l'un de	ses	serviteurs.	Cette capacité est sensible à la provocation");
-		if(degats < 0)
-			throw new HearthStoneException("Erreur: Dégats de l'attaque négatif");
-		this.degats = degats;
+		super("Attaque ciblée", "Cette capacité permet à la carte qui la possède d'attaquer une cible, soit le héros, soit l'un de ses serviteurs. Cette capacité est sensible à la provocation");
+		setDegats(degats);
 	}	
 	
+	public void setDegats(int degats) {
+		this.degats = degats;
+	}
 	@Override
 	public void executerAction(Object cible ) throws HearthStoneException {	
 		if(cible == null)
@@ -22,16 +23,20 @@ public class AttaqueCiblee extends Capacite {
 		if(!(cible instanceof Serviteur || cible instanceof Heros))
             throw new HearthStoneException("Vous ne pouvez pas attaquer cette cible.");
 		
-		if (cible instanceof Heros)
-			((Heros) cible).setPointsVie(((Heros) cible).getPointsVie() - degats);
+		if (cible instanceof Heros) {
+			Heros heros = (Heros) cible;
+			
+			if(!heros.estAttaquable())
+				throw new HearthStoneException("Vous ne pouvez pas attaquer le heros adverse.");
+			heros.setPointsVie((heros).getPointsVie() - degats);
+			
+		}
 		
 		if (cible instanceof Serviteur){
 			Serviteur serviteur = (Serviteur) cible;
 			if(!serviteur.estAttaquable())
 				throw new HearthStoneException("Vous ne pouvez pas attaquer ce serviteur.");
 			serviteur.setPointsVie((serviteur).getPointsVie() - degats);
-			if(serviteur.disparait())
-				serviteur.getProprietaire().perdreCarte(serviteur);
 		}
 	}
 	

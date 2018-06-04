@@ -11,7 +11,7 @@ public interface IPlateau {
 	void demarrerPartie() throws HearthStoneException;
 	boolean estDemarree();
 	void finTour(IJoueur joueur) throws HearthStoneException; 
-	void gagnePartie(IJoueur joueur) throws HearthStoneException; 
+	void gagnePartie(IJoueur joueur); 
 	IJoueur getAdversaire();
 	IJoueur getJoueurCourant();
 	void setJoueurCourant(IJoueur joueur); 

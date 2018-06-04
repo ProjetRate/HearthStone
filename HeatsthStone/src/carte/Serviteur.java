@@ -30,10 +30,16 @@ public abstract class Serviteur extends Carte {
     
     public void setPointsVie(int pointsVie) {
         this.pointsVie = pointsVie;
+        if(disparait())
+        	getProprietaire().perdreCarte(this);
     }
 
     public void setPointsAttaque(int pointsAttaque) {
         this.pointsAttaque = pointsAttaque;
+        for (ICapacite capacite : super.getCapacites()) {
+			if(capacite instanceof AttaqueCiblee)
+				((AttaqueCiblee) capacite).setDegats(pointsAttaque);
+		}
     }
 
 	public boolean estAttaquable() {

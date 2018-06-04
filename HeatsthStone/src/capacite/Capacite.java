@@ -51,7 +51,7 @@ public class Capacite implements ICapacite{
 
 	@Override
 	public String toString() {
-		return "Capacite [nom=" + nom + ", description=" + description + "]";
+		return "[" + nom + " : " + description + "]";
 	}
 
 	@Override

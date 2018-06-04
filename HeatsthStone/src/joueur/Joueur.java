@@ -8,6 +8,7 @@ import heros.Heros;
 
 import java.util.ArrayList;
 
+import capacite.EffetPermanent;
 import capacite.ICapacite;
 
 public class Joueur implements IJoueur {
@@ -21,6 +22,7 @@ public class Joueur implements IJoueur {
     public Joueur(String pseudo, Heros heros, Deck deck) {
     	this.nom = pseudo;
         this.heros = heros;
+        heros.setProprietaire(this);
         this.deck = deck;
     }
 
@@ -72,19 +74,19 @@ public class Joueur implements IJoueur {
 		
 				
 		carte.executerEffetDebutMiseEnJeu(carte);
-		
+		/*
 		for (ICapacite capacite : carte.getCapacites()) {
 			capacite.executerEffetMiseEnJeu(carte);
 			}		
-
+*/
+		for(ICarte carteEnjeu : cartesEnJeu) {
+			for(ICapacite capaciteCarteEnJeu : carteEnjeu.getCapacites())
+				if(capaciteCarteEnJeu instanceof EffetPermanent)
+					capaciteCarteEnJeu.executerAction(carte);
+		}
 		this.getJeu().add(carte);
 		if(carte.disparait())
 			this.perdreCarte(carte);
-    }
-
-    public void jouerCarte(ICarte carte, java.lang.Object cible) {
-    	
-
     }
 
     public void perdreCarte(ICarte carte) {
@@ -92,10 +94,11 @@ public class Joueur implements IJoueur {
 			throw new IllegalArgumentException("Erreur: La carte est null.");
 		try {
 			carte = this.getCarteEnJeu(carte.getNom());
+			cartesEnJeu.remove(carte);
+			carte.executerEffetDisparition();
 		} catch (HearthStoneException e) {
 			System.out.println(e.getMessage());
 		}
-		cartesEnJeu.remove(carte);
 
     }
 
@@ -115,6 +118,7 @@ public class Joueur implements IJoueur {
     	if (manaMax < MAX_MANA)
     		manaMax = manaMax + 1;
     	mana = manaMax;
+    	heros.setPeutAttaquer(true);
     	for (ICarte carte : cartesEnJeu) {
 			if(carte instanceof Serviteur) {
 				((Serviteur) carte).setPeutAttaquer(true);
@@ -125,8 +129,7 @@ public class Joueur implements IJoueur {
     		piocher();
     	} catch(HearthStoneException e){
     		System.out.println(e.getMessage());
-    	}
-    	
+    	}    	
     }
 
     public void utiliserCarte(ICarte carte, java.lang.Object cible) {
