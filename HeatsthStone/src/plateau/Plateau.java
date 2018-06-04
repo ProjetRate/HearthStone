@@ -164,7 +164,7 @@ public class Plateau implements IPlateau {
             	ICapacite attaque = null;
             	for (ICapacite capacite : attaquant.getCapacites()) {
 					if(capacite.getNom().equals(new AttaqueCiblee(0).getNom())) {
-						attaque = capacite;
+						attaque = capacite;						
 					}
 				}
             	
