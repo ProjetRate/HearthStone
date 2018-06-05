@@ -16,6 +16,7 @@ public class AttaqueCiblee extends Capacite {
 	public void setDegats(int degats) {
 		this.degats = degats;
 	}
+	
 	@Override
 	public void executerAction(Object cible ) throws HearthStoneException {	
 		if(cible == null)

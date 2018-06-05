@@ -29,7 +29,9 @@ public abstract class Deck {
 			        new LaMissiliereTemeraire(),
 			        new Charge(),
 			        new OgreMagi(),
-			        new Archimage()
+			        new Archimage(),
+			        new GolemDesMoissons(),
+			        new GardeBaieDuButin()
 			));
 		} catch (HearthStoneException e) {
 			e.printStackTrace();

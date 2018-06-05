@@ -1,7 +1,6 @@
 package capacite;
 
 import carte.ICarte;
-import carte.Serviteur;
 import exception.HearthStoneException;
 
 public class InvocationDeServiteurs extends Capacite {
@@ -27,7 +26,6 @@ public class InvocationDeServiteurs extends Capacite {
 
 	@Override
 	public void executerEffetDisparition(Object cible) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -41,9 +39,10 @@ public class InvocationDeServiteurs extends Capacite {
 	public void executerEffetMiseEnJeu(Object cible) {
 		if(cible == null)
 			throw new IllegalArgumentException("Erreur: La cible ne doit pas être null. Elle doit être la carte jouée.");
-		Serviteur invoqueur = (Serviteur)cible;
+		ICarte invoqueur = (ICarte)cible;
 		invoqueur.getProprietaire().getJeu().add(carteInvoque);
 		carteInvoque.setProprietaire(invoqueur.getProprietaire());
+		carteInvoque.executerEffetDebutMiseEnJeu(carteInvoque);
 
 		for(ICarte carteEnjeu : carteInvoque.getProprietaire().getJeu()) {
 			for(ICapacite capaciteCarteEnJeu : carteEnjeu.getCapacites())

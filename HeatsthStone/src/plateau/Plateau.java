@@ -148,6 +148,7 @@ public class Plateau implements IPlateau {
         	requete = sc.nextLine();
         	try {
 				joueurCourrant.jouerCarte(joueurCourrant.getCarteEnMain(requete));
+				gagnePartie(joueurCourrant);
 			} catch (HearthStoneException e) {
 				System.out.println(e.getMessage());
 			}

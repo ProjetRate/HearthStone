@@ -13,7 +13,6 @@ public class IntelligenceDesArcanes extends Sort {
 				new capacites.Pioche(),
 				new capacites.Pioche()
 				)));
-		// TODO Auto-generated constructor stub
 	}
 
 }

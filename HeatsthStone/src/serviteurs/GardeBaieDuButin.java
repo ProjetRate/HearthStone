@@ -8,12 +8,12 @@ import capacites.Provocation;
 import carte.Serviteur;
 import exception.HearthStoneException;
 
-public class Archimage extends Serviteur {
+public class GardeBaieDuButin extends Serviteur {
 	
-	public Archimage() throws HearthStoneException {
-		super(6, "Archimage", new ArrayList<ICapacite>(Arrays.asList(
+	public GardeBaieDuButin() throws HearthStoneException {
+		super(5, "Garde de Baie-du-butin", new ArrayList<ICapacite>(Arrays.asList(
 				new Provocation()
-				)), 4, 7);
+				)), 5, 4);
 	}
 
 }
